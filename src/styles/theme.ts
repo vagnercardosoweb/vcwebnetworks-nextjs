@@ -1,35 +1,40 @@
 export default {
   colors: {
-    primary: '#34495E',
-    secondary: '#2C3E50',
-    success: '#20C05C',
+    primary: '#FFFFFF',
+    secondary: '#FFFFFF',
     error: '#F44336',
-    background: '#FFFFFF',
+    success: '#20C05C',
+    texts: '#030517',
+    white: '#FFFFFF',
+    black: '#000000',
+    gray: '#7B7373',
   },
-  fontSizes: {
-    default: '1.4rem',
-    large: '1.6rem',
-    small: '1.2rem',
-    tiny: '1rem',
+  font: {
+    family:
+      "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+    weight: {
+      thin: 100,
+      regular: 400,
+      medium: 500,
+      bold: 700,
+    },
+    sizes: {
+      xxsmall: '1.4rem',
+      xsmall: '1.6rem',
+      small: '1.8rem',
+      medium: '2.2rem',
+      large: '2.6rem',
+      xlarge: '3.4rem',
+      xxlarge: '5.2rem',
+    },
   },
   spacing: {
-    default: '1.6rem',
-    vertical: '1.6rem 0',
-    horizontal: '0 1.6rem',
-    large: '2.4rem',
-  },
-  transition: {
-    default: '180ms ease-in-out',
-  },
-  radii: {
-    default: '0.8rem',
-    small: '0.4rem',
-    smallTop: '0.4rem 0.4rem 0 0',
-    smallBottom: '0 0 0.4rem 0.4rem',
-    tiny: '0.2rem',
-  },
-  shadows: {
-    default: '0 0.5rem 2rem rgba(0, 0, 0, 0.08)',
-    flat: '0 0.2rem 0.2rem rgba(0, 0, 0, 0.08)',
+    xxsmall: '0.8rem',
+    xsmall: '1.6rem',
+    small: '2.4rem',
+    medium: '3.2rem',
+    large: '6.0rem',
+    xlarge: '6.4rem',
+    xxlarge: '12.8rem',
   },
 };

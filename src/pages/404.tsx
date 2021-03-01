@@ -1,21 +1,17 @@
-import { NextPage } from 'next';
+import React from 'react';
 
-import Layout from '../components/Layout';
-
-const NotFound: NextPage<Record<string, unknown>> = () => {
+const NotFound: React.FC = () => {
   return (
-    <Layout title="Página não encontrada.">
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
-        }}
-      >
-        <h1>Página não encontrada.</h1>
-      </div>
-    </Layout>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+    >
+      <h1>Página não encontrada.</h1>
+    </div>
   );
 };
 

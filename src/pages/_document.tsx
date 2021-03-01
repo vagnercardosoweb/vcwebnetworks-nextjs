@@ -1,11 +1,18 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
+import React from 'react';
 
 import { ServerStyleSheet } from 'styled-components';
 
+import Analytics from '@/components/Analytics';
+
+interface IResponse {
+  styles: JSX.Element;
+  html: string;
+  head?: JSX.Element[];
+}
+
 export default class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext,
-  ): Promise<{ styles: JSX.Element; html: string; head?: JSX.Element[] }> {
+  static async getInitialProps(ctx: DocumentContext): Promise<IResponse> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -33,15 +40,18 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html lang="pt">
+      <Html lang="pt-br">
         <Head>
-          <meta charSet="UTF-8" />
-          <meta httpEquiv="x-ua-compatible" content="IE=edge,chrome=1" />
-          <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;700&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
           <NextScript />
+          <Analytics />
         </body>
       </Html>
     );
