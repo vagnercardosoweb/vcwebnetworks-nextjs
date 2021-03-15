@@ -5,12 +5,8 @@ export default createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
-    outline: 0;
     box-sizing: border-box;
-    vertical-align: baseline;
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale;
+    outline: 0;
   }
 
   html {
@@ -24,6 +20,10 @@ export default createGlobalStyle`
 
   body {
     height: auto;
+    vertical-align: baseline;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body, #root {
@@ -66,7 +66,7 @@ export default createGlobalStyle`
     input,
     button {
       font-family: ${theme.font.family};
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.xsmall};
       line-height: 1.48;
     }
   `}

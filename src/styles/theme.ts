@@ -1,4 +1,5 @@
 export default {
+  mode: 'light',
   colors: {
     primary: '#FFFFFF',
     secondary: '#FFFFFF',
@@ -37,4 +38,4 @@ export default {
     xlarge: '6.4rem',
     xxlarge: '12.8rem',
   },
-};
+} as const;

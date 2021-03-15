@@ -3,7 +3,7 @@ const configClient = {
   subtitle: '',
   description: '',
 
-  seoImage: '/images/seo',
+  seoImage: '/images/seo.png',
 
   twitter: {
     creator: '@vcwebnetworks',

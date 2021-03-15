@@ -3,8 +3,10 @@ import 'styled-components';
 import theme from './theme';
 
 export type Theme = typeof theme;
+export type ThemeMode = 'light' | 'dark';
 
 declare module 'styled-components' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface DefaultTheme extends Theme {}
+  export interface DefaultTheme extends Theme {
+    mode: ThemeMode;
+  }
 }

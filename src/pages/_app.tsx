@@ -1,59 +1,45 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 
-import NProgress from 'nprogress';
-import { ThemeProvider } from 'styled-components';
-
+import NProgress from '@/components/NProgress';
 import SEO from '@/components/SEO';
 import configClient from '@/config/client';
+import { ThemeProvider } from '@/contexts/theme';
 import GlobalStyles from '@/styles/global';
+import { ThemeMode } from '@/styles/styled';
 import theme from '@/styles/theme';
-import * as gtag from '@/utils/gtag';
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const router = useRouter();
+interface Props extends AppProps {
+  theme: { mode: ThemeMode };
+}
 
-  const routeChangeStart = useCallback(() => NProgress.start(), []);
-  const routeChangeError = useCallback(() => NProgress.done(), []);
-
-  const routeChangeComplete = useCallback(() => {
-    NProgress.done();
-    gtag.pageview();
-  }, []);
-
-  useEffect(() => {
-    router.events.on('routeChangeStart', routeChangeStart);
-    router.events.on('routeChangeError', routeChangeStart);
-    router.events.on('routeChangeComplete', routeChangeStart);
-
-    return () => {
-      router.events.off('routeChangeStart', routeChangeStart);
-      router.events.off('routeChangeError', routeChangeError);
-      router.events.off('routeChangeComplete', routeChangeComplete);
-    };
-  }, [routeChangeComplete, routeChangeError, routeChangeStart, router.events]);
-
+const App: React.FC<Props> = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="x-ua-compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {configClient.baseUrl() && <link rel="base" href={configClient.baseUrl()} />}
+        {configClient.baseUrl() && (
+          <link rel="base" href={configClient.baseUrl()} />
+        )}
 
         {theme.colors.primary && (
           <>
             <meta name="theme-color" content={theme.colors.primary} />
-            <meta name="msapplication-TileColor" content={theme.colors.primary} />
+            <meta
+              name="msapplication-TileColor"
+              content={theme.colors.primary}
+            />
           </>
         )}
       </Head>
 
       <SEO />
       <GlobalStyles />
+      <NProgress />
       <Component {...pageProps} />
     </ThemeProvider>
   );

@@ -21,9 +21,16 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks", "import-helpers"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "react-hooks",
+    "import-helpers"
+  ],
   "rules": {
     "prettier/prettier": "error",
+    "no-param-reassign": "off",
     "space-before-function-paren": "off",
     "no-use-before-define": "off",
     "jsx-a11y/anchor-is-valid": [
@@ -59,13 +66,19 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["/^react|^next/", "module", "/^@/", ["parent", "sibling", "index"]],
+        "groups": [
+          "/^react|^next/",
+          "module",
+          "/^@/",
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true
         }
       }
-    ]
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "settings": {
     "import/parsers": {

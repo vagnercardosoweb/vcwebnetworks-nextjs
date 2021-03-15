@@ -28,10 +28,14 @@ const SEO: React.FC<ISeoProps> = ({
 
   const pageUrl = url ?? `${configClient.baseUrl()}${router.asPath}`;
   let pageTitle = title ?? configClient.title;
-  const pageImage = image ?? configClient.seoImage;
+  let pageImage = image ?? configClient.seoImage;
   const pageDescription = description ?? configClient.description;
   const pageTwitterCreator = twitterCreator ?? configClient.twitter.creator;
   const pageTwitterSite = twitterSite ?? configClient.twitter.site;
+
+  if (!pageImage.match(/http?s:\/\//g)) {
+    pageImage = `${pageUrl}${pageImage}`;
+  }
 
   const additionalMetaTags: MetaTag[] = [
     {
