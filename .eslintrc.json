@@ -32,6 +32,7 @@
     "prettier/prettier": "error",
     "no-param-reassign": "off",
     "space-before-function-paren": "off",
+    "consistent-return": "off",
     "no-use-before-define": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",

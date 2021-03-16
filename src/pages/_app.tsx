@@ -6,15 +6,9 @@ import NProgress from '@/components/NProgress';
 import SEO from '@/components/SEO';
 import configClient from '@/config/client';
 import { ThemeProvider } from '@/contexts/theme';
-import GlobalStyles from '@/styles/global';
-import { ThemeMode } from '@/styles/styled';
 import theme from '@/styles/theme';
 
-interface Props extends AppProps {
-  theme: { mode: ThemeMode };
-}
-
-const App: React.FC<Props> = ({ Component, pageProps }) => {
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider>
       <Head>
@@ -26,19 +20,18 @@ const App: React.FC<Props> = ({ Component, pageProps }) => {
           <link rel="base" href={configClient.baseUrl()} />
         )}
 
-        {theme.colors.primary && (
+        {theme.color.primary && (
           <>
-            <meta name="theme-color" content={theme.colors.primary} />
+            <meta name="theme-color" content={theme.color.primary} />
             <meta
               name="msapplication-TileColor"
-              content={theme.colors.primary}
+              content={theme.color.primary}
             />
           </>
         )}
       </Head>
 
       <SEO />
-      <GlobalStyles />
       <NProgress />
       <Component {...pageProps} />
     </ThemeProvider>

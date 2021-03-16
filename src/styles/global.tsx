@@ -1,5 +1,4 @@
 import { createGlobalStyle, css } from 'styled-components';
-import 'nprogress/nprogress.css';
 
 export default createGlobalStyle`
   * {
@@ -21,6 +20,8 @@ export default createGlobalStyle`
   body {
     height: auto;
     vertical-align: baseline;
+    background: ${({ theme }) => theme.color.background};
+    color: ${({ theme }) => theme.color.text};
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale;
@@ -36,12 +37,13 @@ export default createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6, strong {
-    font-weight: ${({ theme }) => theme.font.weight.bold}
+    font-weight: ${({ theme }) => theme.font.weight.bold};
   }
 
   a {
     text-decoration: none;
     background: none;
+    font-weight: ${({ theme }) => theme.font.weight.bold};
     cursor: pointer;
     border: 0;
     transition: 180ms ease-in-out;
@@ -55,11 +57,11 @@ export default createGlobalStyle`
     align-items: center;
   }
 
-  /* ul {
+  ul {
     list-style: none;
     text-align: left;
     padding: 0;
-  } */
+  }
 
   ${({ theme }) => css`
     body,
@@ -67,7 +69,6 @@ export default createGlobalStyle`
     button {
       font-family: ${theme.font.family};
       font-size: ${theme.font.sizes.xsmall};
-      line-height: 1.48;
     }
   `}
 `;

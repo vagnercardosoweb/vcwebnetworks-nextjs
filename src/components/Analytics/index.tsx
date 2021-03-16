@@ -10,7 +10,11 @@ const Analytics = (): JSX.Element => {
 
   return (
     <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`} />
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
+      />
+
       <script
         dangerouslySetInnerHTML={{
           __html: `

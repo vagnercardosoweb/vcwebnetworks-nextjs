@@ -1,8 +1,12 @@
+import Link from 'next/link';
 import React from 'react';
 
 import configClient from '@/config/client';
+import { useTheme } from '@/contexts/theme';
 
 const Home: React.FC = () => {
+  const { theme } = useTheme();
+
   return (
     <div
       style={{
@@ -12,7 +16,11 @@ const Home: React.FC = () => {
         height: '100vh',
       }}
     >
-      <h1>{configClient.title}</h1>
+      <Link href="/">
+        <a>
+          <h1 style={{ color: theme.color.text }}>{configClient.title}</h1>
+        </a>
+      </Link>
     </div>
   );
 };
