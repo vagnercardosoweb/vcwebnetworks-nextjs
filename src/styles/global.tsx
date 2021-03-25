@@ -4,8 +4,8 @@ export default createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     outline: 0;
+    box-sizing: border-box;
   }
 
   html {
@@ -13,7 +13,7 @@ export default createGlobalStyle`
     height: 100%;
 
     @media (min-width: 1981px) {
-      font-size: 80%;
+      font-size: 87.5%; /* 1rem = 14px */
     };
   }
 
@@ -27,13 +27,9 @@ export default createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  body, #root {
+  html, body, #__next {
     min-height: 100vh;
     position: relative;
-  }
-
-  #root {
-    height: 100%;
   }
 
   h1, h2, h3, h4, h5, h6, strong {

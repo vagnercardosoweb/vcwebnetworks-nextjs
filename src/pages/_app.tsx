@@ -29,6 +29,10 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
             />
           </>
         )}
+
+        <link rel="shortcut icon" href="/images/icon-512x512.png" />
+        <link rel="apple-touch-icon" href="/images/icon-512x512.png" />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
 
       <SEO />
