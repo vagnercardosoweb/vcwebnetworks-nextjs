@@ -10,7 +10,6 @@ export default createGlobalStyle`
 
   html {
     font-size: 62.5%; /* 1rem = 10px */
-    height: 100%;
 
     @media (min-width: 1981px) {
       font-size: 87.5%; /* 1rem = 14px */
@@ -18,7 +17,6 @@ export default createGlobalStyle`
   }
 
   body {
-    height: auto;
     vertical-align: baseline;
     background: ${({ theme }) => theme.color.background};
     color: ${({ theme }) => theme.color.text};
@@ -28,7 +26,8 @@ export default createGlobalStyle`
   }
 
   html, body, #__next {
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
   }
 
