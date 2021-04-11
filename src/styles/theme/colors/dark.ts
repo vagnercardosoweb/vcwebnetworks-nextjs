@@ -3,7 +3,7 @@ import colorLight from './light';
 const colorDark = {
   ...colorLight,
   text: '#FAFAFA',
-  background: '#212121',
+  background: '#333333',
 };
 
 export default colorDark;

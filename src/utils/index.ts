@@ -145,3 +145,38 @@ export const formatCpf = (value: string): string =>
 
 export const sleep = (ms = 0): Promise<unknown> =>
   new Promise(resolve => setTimeout(() => resolve, ms));
+
+export const strLimit = (value: string, limit?: number, endLine?: '...') => {
+  const strLength = value.replace(/\s/g, '').length;
+
+  if (limit && strLength > limit) {
+    return value.substring(0, limit) + endLine;
+  }
+
+  return value;
+};
+
+export function ucFirst(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+export const createUrlSearchParams = (
+  params: Record<string, any>,
+  mapperParams: Record<string, any> = {},
+): URLSearchParams => {
+  const urlSearchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value) {
+      let parseKey = key;
+
+      if (key in mapperParams) {
+        parseKey = mapperParams[key];
+      }
+
+      urlSearchParams.append(parseKey, `${value}`);
+    }
+  });
+
+  return urlSearchParams;
+};

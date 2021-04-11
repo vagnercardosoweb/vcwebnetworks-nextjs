@@ -53,6 +53,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;700&display=swap"
             rel="stylesheet"
           />
+
+          {/* Blog load embeds socials */}
+          {/* <script async src="https://www.instagram.com/embed.js" />
+           <script async src="https://platform.twitter.com/widgets.js" /> */}
         </Head>
         <body>
           <Main />

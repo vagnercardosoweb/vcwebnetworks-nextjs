@@ -3,7 +3,9 @@ import { MetaTag } from 'next-seo/lib/types';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import commonConfig from '@/config';
 import configClient from '@/config/client';
+import configSocial from '@/config/social';
 
 export interface ISeoProps {
   title?: string;
@@ -26,12 +28,12 @@ const SEO: React.FC<ISeoProps> = ({
 }) => {
   const router = useRouter();
 
-  const pageUrl = url ?? `${configClient.baseUrl()}${router.asPath}`;
-  let pageTitle = title ?? configClient.title;
-  let pageImage = image ?? configClient.seoImage;
+  const pageUrl = commonConfig.url(url ?? router.asPath).trim();
+  let pageTitle = `${title ? `${title} - ` : ''}${configClient.title}`.trim();
+  let pageImage = image ?? commonConfig.seoImage;
   const pageDescription = description ?? configClient.description;
-  const pageTwitterCreator = twitterCreator ?? configClient.twitter.creator;
-  const pageTwitterSite = twitterSite ?? configClient.twitter.site;
+  const pageTwitterCreator = twitterCreator ?? configSocial.twitter.creator;
+  const pageTwitterSite = twitterSite ?? configSocial.twitter.site;
 
   if (!pageImage.match(/http?s:\/\//g)) {
     pageImage = `${pageUrl}${pageImage}`;
@@ -53,6 +55,10 @@ const SEO: React.FC<ISeoProps> = ({
     {
       name: 'HandheldFriendly',
       content: 'True',
+    },
+    {
+      property: 'fb:pages',
+      content: configSocial.facebook.pageId,
     },
   ];
 
@@ -76,6 +82,7 @@ const SEO: React.FC<ISeoProps> = ({
       nofollow={!shouldIndexPage}
       noindex={!shouldIndexPage}
       additionalMetaTags={additionalMetaTags}
+      facebook={{ appId: configSocial.facebook.appId }}
       openGraph={{
         title: pageTitle,
         description: pageDescription,

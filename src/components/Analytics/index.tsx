@@ -1,10 +1,10 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 
-const { NEXT_PUBLIC_GA_TRACKING_ID } = process.env;
+import configSocial from '@/config/social';
 
 const Analytics = (): JSX.Element => {
-  if (!NEXT_PUBLIC_GA_TRACKING_ID) {
+  if (!configSocial.google.trackingId) {
     return null;
   }
 
@@ -12,7 +12,7 @@ const Analytics = (): JSX.Element => {
     <>
       <script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_TRACKING_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${configSocial.google.trackingId}`}
       />
 
       <script
@@ -21,7 +21,7 @@ const Analytics = (): JSX.Element => {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${NEXT_PUBLIC_GA_TRACKING_ID}', {
+            gtag('config', '${configSocial.google.trackingId}', {
               page_path: window.location.pathname,
             });
           `,

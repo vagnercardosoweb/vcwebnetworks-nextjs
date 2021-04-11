@@ -1,13 +1,13 @@
 const colorLight = {
   primary: '',
   secondary: '',
-  text: '#212121',
+  text: '#333333',
   grey: '#EEEEEE',
   lightGrey: '#FAFAFA',
   darkGrey: '#BCBCBC',
-  success: '#2E7D32',
-  error: '#C62828',
   background: '#FAFAFA',
+  error: '#C62828',
+  success: '#2E7D32',
   yellow: '#F9A825',
   orange: '#EF6C00',
 };
