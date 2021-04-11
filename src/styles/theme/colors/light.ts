@@ -2,6 +2,7 @@ const colorLight = {
   primary: '',
   secondary: '',
   text: '#333333',
+  white: '#FFFFFF',
   grey: '#EEEEEE',
   lightGrey: '#FAFAFA',
   darkGrey: '#BCBCBC',
