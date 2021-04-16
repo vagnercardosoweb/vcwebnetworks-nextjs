@@ -16,19 +16,20 @@ export const TitleHidden = styled.h1`
 
 type AspectRatioContentProps = {
   fixHeight?: string;
+  aspectRatio?: number;
 };
 
 export const AspectRatioContent = styled.div<AspectRatioContentProps>`
-  ${({ fixHeight }) => css`
+  ${({ fixHeight, aspectRatio = 9 / 16 }) => css`
     width: 100%;
     overflow: hidden;
     position: relative;
     display: block;
 
     height: ${fixHeight || 'auto'};
-    padding-top: ${fixHeight ? 'auto' : `${(9 / 16) * 100}%`};
+    padding-top: ${fixHeight ? 'auto' : `${aspectRatio * 100}%`};
 
-    box-shadow: inset 0 0 10px 0 rgb(0 0 0 / 10%);
+    box-shadow: inset 0 0 10px 0 rgb(0, 0, 0, 0.1);
     background: #cccccc;
 
     img {
