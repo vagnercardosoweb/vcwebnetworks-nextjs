@@ -29,12 +29,7 @@ export const ThemeProvider: React.FC = ({ children }): JSX.Element => {
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>('light');
 
   const toggleTheme = useCallback(() => {
-    setCurrentTheme(prevTheme => {
-      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', newTheme);
-
-      return newTheme;
-    });
+    setCurrentTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   }, []);
 
   const value = React.useMemo(
