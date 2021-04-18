@@ -14,23 +14,65 @@ type Props = PropsWithChildren<{
   showFullWidth?: boolean;
 }>;
 
+type MyHTMLDivElement = {
+  msRequestFullscreen: () => Promise<void>;
+  webkitRequestFullscreen: () => Promise<void>;
+} & HTMLDivElement;
+
+declare global {
+  interface Document {
+    msExitFullscreen: () => Promise<void>;
+    webkitExitFullscreen: () => Promise<void>;
+    mozFullScreenEnabled: boolean;
+    webkitRequestFullScreen: boolean;
+    webkitFullscreenElement: unknown;
+    webkitFullscreenEnabled: boolean;
+  }
+
+  interface HTMLElement {
+    webkitRequestFullScreen: boolean;
+  }
+}
+
 const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<MyHTMLDivElement>(null);
 
   const totalChildren = useMemo(() => React.Children.count(children), [
     children,
   ]);
+
+  const isFullscreenEnable = useCallback(() => {
+    return (
+      document.fullscreenEnabled ||
+      document.mozFullScreenEnabled ||
+      document.documentElement.webkitRequestFullScreen ||
+      document.webkitFullscreenEnabled
+    );
+  }, []);
 
   const toggleFullWidth = useCallback(async () => {
     if (!wrapperRef.current) {
       return;
     }
 
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-    } else {
+    const isFullscreenShow =
+      document.fullscreenElement || document.webkitFullscreenElement;
+
+    if (isFullscreenShow) {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        await document.msExitFullscreen();
+      }
+    } else if (wrapperRef.current?.requestFullscreen) {
       await wrapperRef.current.requestFullscreen();
+    } else if (wrapperRef.current?.webkitRequestFullscreen) {
+      await wrapperRef.current.webkitRequestFullscreen();
+    } else if (wrapperRef.current?.msRequestFullscreen) {
+      await wrapperRef.current.msRequestFullscreen();
     }
   }, []);
 
@@ -72,8 +114,9 @@ const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
     return React.Children.map(children, (child: ReactElement, index) => {
       if (activeIndex === index) {
         return React.cloneElement(child, {
-          hidden: activeIndex !== index,
           style: { position: 'inherit' },
+          hidden: activeIndex !== index,
+          'aria-hidden': activeIndex !== index,
         });
       }
 
@@ -89,7 +132,7 @@ const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
         </S.Count>
       )}
 
-      {showFullWidth && (
+      {showFullWidth && isFullscreenEnable() && (
         <S.FullWidth onClick={toggleFullWidth}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -116,8 +159,12 @@ const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
         </S.FullWidth>
       )}
 
-      <S.ArrowLeft onClick={handlePrev} />
-      <S.ArrowRight onClick={handleNext} />
+      {totalChildren > 0 && (
+        <>
+          <S.ArrowLeft onClick={handlePrev} />
+          <S.ArrowRight onClick={handleNext} />
+        </>
+      )}
 
       <S.Content>
         {renderSlides()}
