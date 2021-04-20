@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   PropsWithChildren,
   ReactElement,
@@ -19,21 +20,6 @@ type MyHTMLDivElement = {
   webkitRequestFullscreen: () => Promise<void>;
 } & HTMLDivElement;
 
-declare global {
-  interface Document {
-    msExitFullscreen: () => Promise<void>;
-    webkitExitFullscreen: () => Promise<void>;
-    mozFullScreenEnabled: boolean;
-    webkitRequestFullScreen: boolean;
-    webkitFullscreenElement: unknown;
-    webkitFullscreenEnabled: boolean;
-  }
-
-  interface HTMLElement {
-    webkitRequestFullScreen: boolean;
-  }
-}
-
 const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const wrapperRef = useRef<MyHTMLDivElement>(null);
@@ -45,9 +31,9 @@ const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
   const isFullscreenEnable = useCallback(() => {
     return (
       document.fullscreenEnabled ||
-      document.mozFullScreenEnabled ||
-      document.documentElement.webkitRequestFullScreen ||
-      document.webkitFullscreenEnabled
+      (document as any).mozFullScreenEnabled ||
+      (document as any).documentElement.webkitRequestFullScreen ||
+      (document as any).webkitFullscreenEnabled
     );
   }, []);
 
@@ -57,15 +43,15 @@ const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
     }
 
     const isFullscreenShow =
-      document.fullscreenElement || document.webkitFullscreenElement;
+      document.fullscreenElement || (document as any).webkitFullscreenElement;
 
     if (isFullscreenShow) {
       if (document.exitFullscreen) {
         await document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        await document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        await document.msExitFullscreen();
+      } else if ((document as any)?.webkitExitFullscreen) {
+        await (document as any).webkitExitFullscreen();
+      } else if ((document as any)?.msExitFullscreen) {
+        await (document as any).msExitFullscreen();
       }
     } else if (wrapperRef.current?.requestFullscreen) {
       await wrapperRef.current.requestFullscreen();
