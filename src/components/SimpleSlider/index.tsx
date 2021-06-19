@@ -24,9 +24,10 @@ const SimpleSlider = ({ children, showCounter, showFullWidth }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const wrapperRef = useRef<MyHTMLDivElement>(null);
 
-  const totalChildren = useMemo(() => React.Children.count(children), [
-    children,
-  ]);
+  const totalChildren = useMemo(
+    () => React.Children.count(children),
+    [children],
+  );
 
   const isFullscreenEnable = useCallback(() => {
     return (

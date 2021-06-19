@@ -19,6 +19,9 @@ const theme = {
       black: 900,
     },
   },
+  transition: {
+    default: '180ms ease-in-out',
+  },
 } as const;
 
 export default theme;

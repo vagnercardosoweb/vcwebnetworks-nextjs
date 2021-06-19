@@ -2,16 +2,16 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 120rem; // 1200px
+  max-width: 84rem; // 1200px
   margin: 0 auto;
   position: relative;
   display: block;
 `;
 
 export const TitleHidden = styled.h1`
-  font-size: 0;
-  text-indent: -999999px;
-  visibility: hidden;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
 `;
 
 type AspectRatioContentProps = {

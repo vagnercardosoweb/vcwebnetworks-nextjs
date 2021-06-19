@@ -34,43 +34,65 @@ export default createGlobalStyle`
       position: relative;
     }
 
+    body,
+    input,
+    button {
+      font-size: 1.6rem;
+      font-family: ${theme.font.family.default};
+      font-weight: ${theme.font.weight.regular};
+    }
+
     h1,
     h2,
     h3,
+    strong {
+      font-weight: ${theme.font.weight.bold};
+    }
+
     h4,
     h5,
-    h6,
-    strong {
-      font-family: ${theme.font.family.default};
-      font-weight: ${theme.font.weight.bold};
+    h6 {
+      font-weight: ${theme.font.weight.medium};
     }
 
     a {
       text-decoration: none;
       background: none;
-      font-weight: ${theme.font.weight.bold};
+      font-weight: ${theme.font.weight.medium};
       cursor: pointer;
       border: 0;
-      transition: 180ms ease-in-out;
+      transition: ${theme.transition.default};
+
+      :hover {
+        color: ${theme.color.primary};
+        text-decoration: underline;
+      }
     }
 
     button {
-      cursor: pointer;
       border: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: ${theme.transition.default};
+      cursor: pointer;
+      background: none;
+
+      :not(:disabled) {
+        cursor: pointer;
+      }
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
     }
 
     ul {
+      list-style: none;
       text-align: left;
-    }
-
-    body,
-    input,
-    button {
-      font-family: ${theme.font.family.default};
-      font-size: 1.6rem;
+      padding: 0;
     }
 
     [hidden] {
@@ -81,6 +103,31 @@ export default createGlobalStyle`
       width: 100%;
       max-width: 100%;
       height: auto;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    img,
+    svg {
+      vertical-align: middle;
+    }
+
+    #nprogress {
+      .bar {
+        background: ${theme.color.primary};
+      }
+
+      .peg {
+        box-shadow: 0 0 10px ${theme.color.primary},
+          0 0 5px ${theme.color.primary};
+      }
+
+      .spinner-icon {
+        border-top-color: ${theme.color.primary};
+        border-left-color: ${theme.color.primary};
+      }
     }
   `}
 `;

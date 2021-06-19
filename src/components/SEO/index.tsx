@@ -3,7 +3,7 @@ import { MetaTag } from 'next-seo/lib/types';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import commonConfig from '@/config';
+import configCommon from '@/config';
 import configClient from '@/config/client';
 import configSocial from '@/config/social';
 
@@ -28,15 +28,24 @@ const SEO: React.FC<ISeoProps> = ({
 }) => {
   const router = useRouter();
 
-  const pageUrl = commonConfig.url(url ?? router.asPath).trim();
-  let pageTitle = `${title ? `${title} - ` : ''}${configClient.title}`.trim();
-  let pageImage = image ?? commonConfig.seoImage;
+  if (router.route === '/404') {
+    title = 'Página não encontrada';
+  }
+
+  if (router.route === '/500') {
+    title = 'Erro interno';
+  }
+
+  const pageUrl = configCommon.url(url ?? router.asPath).trim();
+  const pageTitle = `${title ? `${title} - ` : ''}${configClient.title}`.trim();
   const pageDescription = description ?? configClient.description;
   const pageTwitterCreator = twitterCreator ?? configSocial.twitter.creator;
   const pageTwitterSite = twitterSite ?? configSocial.twitter.site;
 
+  let pageImage = image ?? configCommon.seoImage;
+
   if (!pageImage.match(/http?s:\/\//g)) {
-    pageImage = `${pageUrl}${pageImage}`;
+    pageImage = `${pageUrl}${pageImage.substr(1)}`;
   }
 
   const additionalMetaTags: MetaTag[] = [
@@ -67,10 +76,6 @@ const SEO: React.FC<ISeoProps> = ({
       name: 'image',
       content: pageImage,
     });
-  }
-
-  if (router.route === '/404') {
-    pageTitle = 'Página não encontrada.';
   }
 
   return (

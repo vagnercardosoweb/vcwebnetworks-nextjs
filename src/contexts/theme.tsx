@@ -29,7 +29,12 @@ export const ThemeProvider: React.FC = ({ children }): JSX.Element => {
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>('light');
 
   const toggleTheme = useCallback(() => {
-    setCurrentTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setCurrentTheme(prevTheme => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+
+      return newTheme;
+    });
   }, []);
 
   const value = React.useMemo(
@@ -82,13 +87,17 @@ export const ThemeProvider: React.FC = ({ children }): JSX.Element => {
       setCurrentTheme(event.matches ? 'dark' : 'light');
     };
 
-    matchMediaThemeDark.addEventListener('change', handleChangeThemeInSystem);
+    if (matchMediaThemeDark.addEventListener) {
+      matchMediaThemeDark.addEventListener('change', handleChangeThemeInSystem);
+    }
 
     return () => {
-      matchMediaThemeDark?.removeEventListener(
-        'change',
-        handleChangeThemeInSystem,
-      );
+      if (matchMediaThemeDark?.removeEventListener) {
+        matchMediaThemeDark?.removeEventListener(
+          'change',
+          handleChangeThemeInSystem,
+        );
+      }
     };
   }, []);
 

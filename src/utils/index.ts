@@ -146,8 +146,8 @@ export const formatCpf = (value: string): string =>
 export const sleep = (ms = 0): Promise<unknown> =>
   new Promise(resolve => setTimeout(() => resolve, ms));
 
-export const strLimit = (value: string, limit?: number, endLine?: '...') => {
-  const strLength = value.replace(/\s/g, '').length;
+export const strLimit = (value: string, limit?: number, endLine = '...') => {
+  const strLength = value.length;
 
   if (limit && strLength > limit) {
     return value.substring(0, limit) + endLine;

@@ -1,4 +1,4 @@
-const commonConfig = {
+const configCommon = {
   seoImage: '/images/seo.png',
 
   url: (path?: string): string => {
@@ -6,4 +6,4 @@ const commonConfig = {
   },
 };
 
-export default commonConfig;
+export default configCommon;
