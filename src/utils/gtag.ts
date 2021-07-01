@@ -1,3 +1,5 @@
+import configSocial from '@/config/social';
+
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,7 +20,7 @@ export const pageview = (): void => {
     return;
   }
 
-  window.gtag('config', process.env.NEXT_PUBLIC_GA_TRACKING_ID, {
+  window.gtag('config', configSocial.google.trackingId, {
     page_path: window.location.pathname,
     page_location: window.location.pathname,
     page_title: document.title,

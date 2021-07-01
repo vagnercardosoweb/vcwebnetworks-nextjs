@@ -99,13 +99,20 @@ export default createGlobalStyle`
       display: none !important;
     }
 
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
     img {
-      width: 100%;
       max-width: 100%;
       height: auto;
+      object-fit: cover;
     }
 
     svg {
+      width: 100%;
+      height: 100%;
       flex-shrink: 0;
     }
 

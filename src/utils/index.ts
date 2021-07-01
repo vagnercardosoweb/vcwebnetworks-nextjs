@@ -1,11 +1,10 @@
-import { NextApiResponse } from 'next';
 import { NextRouter } from 'next/router';
 
 export const isRouterReady = (router: NextRouter): boolean =>
   router.asPath !== router.route;
 
 export const serverRedirect = (
-  response: NextApiResponse,
+  response: any,
   url: string,
   status: `permanent` | `temporary`,
 ): void => {
@@ -115,25 +114,31 @@ export const clipboard = (text: string, callback?: ClipboardCallback): void => {
   }
 };
 
-export const formatMask = (value: string, mask: string): string => {
-  let maskedValue = '';
-  let maskedIndex = 0;
-
+export const unmask = (value: string): string => {
   // eslint-disable-next-line no-useless-escape
-  const unmasked = value.replace(/[\-\|\(\)\/\.\: ]/gm, '');
-  const valueLength = unmasked.length;
+  return value.replace(/[\-\|\(\)\/\.\: ]/gm, '');
+};
+
+export const formatMask = (value: string, mask: string): string => {
+  const unmasked = unmask(value);
+  const unmaskedLength = unmasked.length;
   const maskLength = mask.replace(/[^#]/gm, '').length;
 
-  if (valueLength > maskLength || maskLength > valueLength) {
-    return value || '';
+  if (unmaskedLength > maskLength) {
+    unmasked.slice(unmaskedLength, unmaskedLength - maskLength);
   }
 
-  for (let i = 0; i < String(mask).length; i += 1) {
+  let maskedValue = '';
+  let maskedIndex = 0;
+  let unmaskedIndex = unmaskedLength;
+
+  for (let i = 0; i < unmaskedIndex; i += 1) {
     if (mask[i] === '#' && typeof unmasked[maskedIndex] !== 'undefined') {
       maskedValue += unmasked[maskedIndex];
       maskedIndex += 1;
     } else if (typeof mask[i] !== 'undefined') {
       maskedValue += mask[i];
+      unmaskedIndex += 1;
     }
   }
 
@@ -179,4 +184,29 @@ export const createUrlSearchParams = (
   });
 
   return urlSearchParams;
+};
+
+export const showAlert = (message: string) => {
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line no-alert
+    alert(message);
+  }
+};
+
+export const dotToObject = (obj: Record<string, any>): any => {
+  const result = {};
+
+  Object.keys(obj).forEach(path => {
+    const parts = path.split('.');
+    let target = result;
+
+    while (parts.length > 1) {
+      const part = parts.shift();
+      target = target[part] || {};
+    }
+
+    target[parts[0]] = obj[path];
+  });
+
+  return result;
 };

@@ -29,6 +29,8 @@
     "import-helpers"
   ],
   "rules": {
+    "camelcase": "off",
+    "no-prototype-builtins": "off",
     "prettier/prettier": "error",
     "no-param-reassign": "off",
     "space-before-function-paren": "off",
@@ -47,6 +49,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -59,7 +62,9 @@
       {
         "ts": "never",
         "tsx": "never",
-        "jsx": "never"
+        "jsx": "never",
+        "png": "never",
+        "jpg": "never"
       }
     ],
     "import/prefer-default-export": "off",
@@ -79,7 +84,9 @@
         }
       }
     ],
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "settings": {
     "import/parsers": {
